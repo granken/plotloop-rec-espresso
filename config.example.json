@@ -1,0 +1,54 @@
+{
+  "asr": {
+    "provider": "volcengine",
+    "volcengine": {
+      "app_key": "YOUR_VOLCENGINE_APP_KEY",
+      "access_key": "YOUR_VOLCENGINE_ACCESS_KEY",
+      "secret_key": "YOUR_VOLCENGINE_SECRET_KEY",
+      "endpoint": "wss://openspeech.bytedance.com/api/v2/auc",
+      "binary_path": "recording-transcribe",
+      "speaker_diarization": true
+    },
+    "whisper": {
+      "binary_path": "whisper",
+      "model": "turbo",
+      "language": "zh"
+    }
+  },
+  "hotwords": {
+    "enabled": true,
+    "glossary_file": "./glossary.json",
+    "custom_replacements": {
+      "播客": "博客",
+      "麦克疯": "麦克风"
+    }
+  },
+  "llm": {
+    "provider": "anthropic",
+    "model": "claude-3-7-sonnet-20250219",
+    "api_key": "YOUR_LLM_API_KEY",
+    "prompt_templates_dir": "./skills/plotloop-rec-espresso/references"
+  },
+  "archiver": {
+    "enabled": true,
+    "target_type": "smb_nas",
+    "smb": {
+      "host": "nas.local",
+      "share": "storage",
+      "mount_point": "/Volumes/storage",
+      "remote_subpath": "audio-backup/espresso"
+    },
+    "local_backup_dir": "~/Backups/audio-archive",
+    "verify_sha256": true,
+    "pointer_card": {
+      "enabled": true,
+      "format": "markdown",
+      "include_metadata": true
+    },
+    "ledger": {
+      "enabled": true,
+      "path": "./_index/audio_archive_ledger.md"
+    },
+    "prune_original": false
+  }
+}
